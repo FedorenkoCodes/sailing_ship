@@ -23,3 +23,14 @@ docker run -it calculator
 ```
 
 This will start the container and execute the Ruby script.
+User is expected to enter the code of origin port and confirm their input with the Enter key. After that the coee of destination port is expected, and the criteria (with cheapest-direct, cheapest, fastest as available options).
+
+## Testing
+
+To run test, use the following command:
+
+```
+./test_script.sh
+```
+
+This will run the only test I've made up just to try it out.
