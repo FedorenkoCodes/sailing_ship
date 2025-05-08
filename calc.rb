@@ -1,6 +1,9 @@
 require 'json'
 
 class ShippingCalculator
+  VALID_CRITERIA = %w[cheapest-direct cheapest fastest].freeze
+  MAX_INPUT_LENGTH = 100
+
   def initialize
     @origin_port = nil
     @destination_port = nil
@@ -10,7 +13,7 @@ class ShippingCalculator
   def calculate
     get_user_input
 
-    if input_valid?(@origin_port, @destination_port, @criteria)
+    if input_valid?
       output_data = [
         {
           origin_port: @origin_port,
@@ -24,6 +27,8 @@ class ShippingCalculator
       puts "Invalid input"
     end
   end
+
+  private
 
   def get_user_input
     while (line = gets)
@@ -39,12 +44,22 @@ class ShippingCalculator
     end
   end
 
-  def input_valid?(origin_port, destination_port, criteria)
-    return false unless origin_port && destination_port && criteria
-    return false if origin_port.length >= 100 || destination_port.length >= 100 || criteria.length >= 100
-    return false unless ['cheapest-direct', 'cheapest', 'fastest'].include?(criteria)
+  def input_valid?
+    return false unless @origin_port && @destination_port && @criteria
+    return false unless input_length_valid?
+    return false unless valid_criteria?
 
     true
+  end
+
+  def valid_criteria?
+    VALID_CRITERIA.include?(@criteria)
+  end
+
+  def input_length_valid?
+    @origin_port.length <= MAX_INPUT_LENGTH ||
+      @destination_port.length <= MAX_INPUT_LENGTH ||
+      @criteria.length <= MAX_INPUT_LENGTH
   end
 end
 
