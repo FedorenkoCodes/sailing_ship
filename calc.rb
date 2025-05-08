@@ -9,11 +9,11 @@ def get_user_input
     line = line.chomp
 
     if origin_port.nil?
-      origin_port = line
+      origin_port = line.strip
     elsif destination_port.nil?
-      destination_port = line
+      destination_port = line.strip
     elsif criteria.nil?
-      criteria = line
+      criteria = line.strip
     end
   end
 
@@ -23,6 +23,7 @@ end
 def input_valid?(origin_port, destination_port, criteria)
   return false unless origin_port && destination_port && criteria
   return false if origin_port.length >= 100 || destination_port.length >= 100 || criteria.length >= 100
+  return false unless ['cheapest-direct', 'cheapest', 'fastest'].include?(criteria)
 
   true
 end

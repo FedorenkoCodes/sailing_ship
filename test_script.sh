@@ -2,13 +2,13 @@
 
 docker build -q -t calculator .
 
-output=$(printf "qwe\nrty\n123\n" | docker run -i --rm calculator)
+output=$(printf "qwe \n rty \n fastest \n" | docker run -i --rm calculator)
 
 expected_output='[
   {
     "origin_port": "qwe",
     "destination_port": "rty",
-    "criteria": "123"
+    "criteria": "fastest"
   }
 ]'
 
