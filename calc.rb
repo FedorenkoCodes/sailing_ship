@@ -41,11 +41,12 @@ class ShippingCalculator
       elsif @criteria.nil?
         @criteria = line.strip
       end
+
+      break if @origin_port && @destination_port && @criteria
     end
   end
 
   def input_valid?
-    return false unless @origin_port && @destination_port && @criteria
     return false unless input_length_valid?
     return false unless valid_criteria?
 
@@ -57,9 +58,7 @@ class ShippingCalculator
   end
 
   def input_length_valid?
-    @origin_port.length <= MAX_INPUT_LENGTH ||
-      @destination_port.length <= MAX_INPUT_LENGTH ||
-      @criteria.length <= MAX_INPUT_LENGTH
+    @origin_port.length <= MAX_INPUT_LENGTH && @destination_port.length <= MAX_INPUT_LENGTH
   end
 end
 
