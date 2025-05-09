@@ -1,5 +1,9 @@
 require 'json'
 
+require_relative 'modes/cheapest_calculator'
+require_relative 'modes/cheapest_direct_calculator'
+require_relative 'modes/fastest_calculator'
+
 class ShippingCalculator
   VALID_CRITERIA = %w[cheapest-direct cheapest fastest].freeze
   MAX_INPUT_LENGTH = 100
@@ -14,13 +18,8 @@ class ShippingCalculator
     get_user_input
 
     if input_valid?
-      output_data = [
-        {
-          origin_port: @origin_port,
-          destination_port: @destination_port,
-          criteria: @criteria,
-        }
-      ]
+      output_data = calculate_shipping_costs
+
       output_json = JSON.pretty_generate(output_data)
       puts output_json
     else
@@ -29,6 +28,19 @@ class ShippingCalculator
   end
 
   private
+
+  def calculate_shipping_costs
+    case @criteria
+    when 'cheapest'
+      CheapestCalculator.calculate(@origin_port, @destination_port)
+    when 'cheapest-direct'
+      CheapestDirectCalculator.calculate(@origin_port, @destination_port)
+    when 'fastest'
+      FastestCalculator.calculate(@origin_port, @destination_port)
+    else
+      raise "Invalid criteria: #{@criteria}"
+    end
+  end
 
   def get_user_input
     while (line = gets)
