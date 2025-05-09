@@ -19,7 +19,7 @@ docker build -t calculator .
 To run the Docker container, use the following command:
 
 ```
-docker run -it calculator
+docker run -it --rm calculator
 ```
 
 This will start the container and execute the Ruby script.
