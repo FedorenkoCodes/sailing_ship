@@ -14,7 +14,7 @@ class ShippingCalculator
     @criteria = nil
   end
 
-  def calculate
+  def toot
     get_user_input
 
     if input_valid?
@@ -74,4 +74,4 @@ class ShippingCalculator
   end
 end
 
-ShippingCalculator.new.calculate
+ShippingCalculator.new.toot
