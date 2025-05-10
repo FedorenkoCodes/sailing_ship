@@ -19,6 +19,21 @@ super_duper_function_to_run_the_test() {
 
 docker build -q -t calculator .
 
+# Test for "CNSHA \n NLRTM \n cheapest-direct \n"
+output=$(printf "CNSHA \n NLRTM \n cheapest-direct \n" | docker run -i --rm calculator)
+expected_output='[
+  {
+    "origin_port": "CNSHA",
+    "destination_port": "NLRTM",
+    "departure_date": "2022-02-01",
+    "arrival_date": "2022-03-01",
+    "sailing_code": "ABCD",
+    "rate": "589.30",
+    "rate_currency": "USD"
+  }
+]'
+super_duper_function_to_run_the_test "$output" "$expected_output"
+
 # Test for "qwe \n rty \n fastest \n"
 output=$(printf "qwe \n rty \n fastest \n" | docker run -i --rm calculator)
 expected_output='[

@@ -8,14 +8,22 @@ class ShippingCalculator
   VALID_CRITERIA = %w[cheapest-direct cheapest fastest].freeze
   MAX_INPUT_LENGTH = 100
 
+  FAKE_INPUT = false
+
   def initialize
     @origin_port = nil
     @destination_port = nil
     @criteria = nil
   end
 
+  def fake_input
+    @origin_port = 'CNSHA'
+    @destination_port = 'NLRTM'
+    @criteria = 'cheapest-direct'
+  end
+
   def toot
-    get_user_input
+    FAKE_INPUT ? fake_input : get_user_input
 
     if input_valid?
       output_data = calculate_shipping_costs
