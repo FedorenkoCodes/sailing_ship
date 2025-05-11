@@ -1,14 +1,14 @@
 require 'json'
+require 'dotenv'
 
 require_relative 'modes/cheapest_calculator'
 require_relative 'modes/cheapest_direct_calculator'
 require_relative 'modes/fastest_calculator'
 
+Dotenv.load
+
 class ShippingCalculator
   VALID_CRITERIA = %w[cheapest-direct cheapest fastest].freeze
-  MAX_INPUT_LENGTH = 100
-
-  FAKE_INPUT = false
 
   def initialize
     @origin_port = nil
@@ -23,7 +23,7 @@ class ShippingCalculator
   end
 
   def toot
-    FAKE_INPUT ? fake_input : get_user_input
+    ENV['FAKE_INPUT'] ? fake_input : get_user_input
 
     if input_valid?
       sailings = calculate_shipping_costs
@@ -97,7 +97,7 @@ class ShippingCalculator
   end
 
   def input_length_valid?
-    @origin_port.length <= MAX_INPUT_LENGTH && @destination_port.length <= MAX_INPUT_LENGTH
+    @origin_port.length <= ENV['MAX_INPUT_LENGTH'].to_i && @destination_port.length <= ENV['MAX_INPUT_LENGTH'].to_i
   end
 end
 

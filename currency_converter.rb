@@ -1,6 +1,6 @@
 class CurrencyConverter
   def self.convert_to_eur(amount, currency, date, exchange_rates)
-    return amount if currency == 'EUR'
+    return amount if currency == ENV['DEFAULT_CURRENCY']
 
     exchange_rate_for_a_date = exchange_rates[date]
     raise "Exchange rate not found for date #{date}" if exchange_rate_for_a_date.nil?
