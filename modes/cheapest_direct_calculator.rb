@@ -8,11 +8,9 @@ class CheapestDirectCalculator < BaseCalculator
 
     raise "No sailings found between #{origin_port} and #{destination_port}" if filtered_sailings.empty?
 
-    filtered_sailings.each do |sailing|
-      populate_rate(sailing)
-    end
+    filtered_sailings.each { |sailing| populate_rate(sailing) }
 
-    cheapest_sailing = filtered_sailings.min_by { |s| s['converted_rate'].to_f }
+    cheapest_sailing = filtered_sailings.min_by { |sailing| sailing['converted_rate'].to_f }
 
     [cheapest_sailing]
   end

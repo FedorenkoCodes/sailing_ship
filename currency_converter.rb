@@ -2,7 +2,7 @@ require_relative 'data_provider'
 
 class CurrencyConverter
   def self.convert_to_eur(amount, currency, date)
-    return amount if currency == ENV['DEFAULT_CURRENCY']
+    return amount.to_f if currency == ENV['DEFAULT_CURRENCY']
 
     exchange_rate_for_a_date = DataProvider.instance.exchange_rates[date]
     raise "Exchange rate not found for date #{date}" if exchange_rate_for_a_date.nil?

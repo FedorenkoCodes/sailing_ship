@@ -19,11 +19,11 @@ class ShippingCalculator
   def fake_input
     @origin_port = 'CNSHA'
     @destination_port = 'NLRTM'
-    @criteria = 'cheapest-direct'
+    @criteria = 'cheapest'
   end
 
   def toot
-    ENV['FAKE_INPUT'] ? fake_input : get_user_input
+    ENV['FAKE_INPUT'] == 'true' ? fake_input : get_user_input
 
     if input_valid?
       sailings = calculate_shipping_costs
