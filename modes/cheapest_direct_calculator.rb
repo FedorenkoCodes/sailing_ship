@@ -1,4 +1,5 @@
 require 'json'
+require_relative '../currency_converter'
 
 class CheapestDirectCalculator
   def self.calculate(origin_port, destination_port)
@@ -7,6 +8,7 @@ class CheapestDirectCalculator
 
     sailings = data['sailings']
     rates = data['rates']
+    exchange_rates = data['exchange_rates']
 
     filtered_sailings = sailings.select do |sailing|
       sailing['origin_port'] == origin_port && sailing['destination_port'] == destination_port
@@ -20,8 +22,8 @@ class CheapestDirectCalculator
       raise "No rate found" if rate.nil?
 
       sailing['rate'] = rate['rate']
-      sailing['converted_rate'] = rate['rate']
       sailing['rate_currency'] = rate['rate_currency']
+      sailing['converted_rate'] = CurrencyConverter.convert_to_eur(rate['rate'], rate['rate_currency'], sailing['departure_date'], exchange_rates)
     end
 
     cheapest_sailing = filtered_sailings.min_by { |s| s['converted_rate'].to_f }
