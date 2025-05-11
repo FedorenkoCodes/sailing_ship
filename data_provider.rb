@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DataProvider
   attr_reader :sailings, :rates, :exchange_rates
 

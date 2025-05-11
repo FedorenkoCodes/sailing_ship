@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'dotenv'
 
@@ -23,34 +25,30 @@ class ShippingCalculator
   end
 
   def toot
-    ENV['FAKE_INPUT'] == 'true' ? fake_input : get_user_input
+    ENV['FAKE_INPUT'] == 'true' ? fake_input : receive_user_input
 
     if input_valid?
       sailings = find_sailings
 
       print_sailings(sailings) if sailings.any?
     else
-      puts "Invalid input"
+      puts 'Invalid input'
     end
   end
 
   private
 
   def print_sailings(sailings)
-    results = []
-
-    sailings.each do |sailing|
-      results <<
-        {
-          origin_port: sailing['origin_port'],
-          destination_port: sailing['destination_port'],
-          departure_date: sailing['departure_date'],
-          arrival_date: sailing['arrival_date'],
-          sailing_code: sailing['sailing_code'],
-          rate: sailing['rate'].to_s,
-          rate_currency: sailing['rate_currency']
-        }
-
+    results = sailings.map do |sailing|
+      {
+        origin_port: sailing['origin_port'],
+        destination_port: sailing['destination_port'],
+        departure_date: sailing['departure_date'],
+        arrival_date: sailing['arrival_date'],
+        sailing_code: sailing['sailing_code'],
+        rate: sailing['rate'].to_s,
+        rate_currency: sailing['rate_currency']
+      }
     end
 
     puts JSON.pretty_generate(results)
@@ -69,7 +67,7 @@ class ShippingCalculator
     end
   end
 
-  def get_user_input
+  def receive_user_input
     while (line = gets)
       line = line.chomp
 

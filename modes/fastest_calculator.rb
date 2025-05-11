@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'base_calculator'
 require 'date'
 
@@ -10,10 +12,8 @@ class FastestCalculator < BaseCalculator
       return []
     end
 
-    all_legs_with_durations = []
-
-    all_legs.each do |leg|
-      all_legs_with_durations << {
+    all_legs_with_durations = all_legs.map do |leg|
+      {
         sailings: leg.each { |sailing| populate_rate(sailing) },
         total_duration: calculate_leg_total_duration(leg)
       }
@@ -24,17 +24,9 @@ class FastestCalculator < BaseCalculator
     fastest_leg[:sailings]
   end
 
-  private
-
   def self.calculate_leg_total_duration(sailings)
-    duration = 0
-
-    sailings.each do |sailing|
-      departure_date = Date.parse(sailing['departure_date'])
-      arrival_date = Date.parse(sailing['arrival_date'])
-      duration += (arrival_date - departure_date).to_i
-    end
-
-    duration
+    sailings.map do |sailing|
+      (Date.parse(sailing['arrival_date']) - Date.parse(sailing['departure_date'])).to_i
+    end.sum
   end
 end
