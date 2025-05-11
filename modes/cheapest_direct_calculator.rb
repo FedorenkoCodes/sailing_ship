@@ -6,7 +6,10 @@ class CheapestDirectCalculator < BaseCalculator
       sailing['origin_port'] == origin_port && sailing['destination_port'] == destination_port
     end
 
-    raise "No sailings found between #{origin_port} and #{destination_port}" if filtered_sailings.empty?
+    if filtered_sailings.empty?
+      puts "No sailings found between #{origin_port} and #{destination_port}"
+      return []
+    end
 
     filtered_sailings.each { |sailing| populate_rate(sailing) }
 

@@ -79,3 +79,9 @@ output=$(printf "qwe \n rty \n coolest \n" | docker run -i --rm calculator)
 expected_output="Invalid input"
 
 super_duper_function_to_run_the_test "$output" "$expected_output"
+
+# Test for "qwe \n rty \n cheapest \n"
+output=$(printf "qwe \n rty \n cheapest \n" | docker run -i --rm calculator)
+expected_output="No sailings found between qwe and rty"
+
+super_duper_function_to_run_the_test "$output" "$expected_output"

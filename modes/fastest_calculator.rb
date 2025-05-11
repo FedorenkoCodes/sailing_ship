@@ -5,7 +5,10 @@ class FastestCalculator < BaseCalculator
   def self.calculate(origin_port, destination_port)
     all_legs = find_all_legs(origin_port, destination_port, DataProvider.instance.sailings)
 
-    raise "No legs found between #{origin_port} and #{destination_port}" if all_legs.empty?
+    if all_legs.empty?
+      puts "No sailings found between #{origin_port} and #{destination_port}"
+      return []
+    end
 
     all_legs_with_durations = []
 

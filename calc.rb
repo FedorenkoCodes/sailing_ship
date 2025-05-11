@@ -26,9 +26,9 @@ class ShippingCalculator
     ENV['FAKE_INPUT'] == 'true' ? fake_input : get_user_input
 
     if input_valid?
-      sailings = calculate_shipping_costs
+      sailings = find_sailings
 
-      print_sailings(sailings)
+      print_sailings(sailings) if sailings.any?
     else
       puts "Invalid input"
     end
@@ -56,7 +56,7 @@ class ShippingCalculator
     puts JSON.pretty_generate(results)
   end
 
-  def calculate_shipping_costs
+  def find_sailings
     case @criteria
     when 'cheapest'
       CheapestCalculator.calculate(@origin_port, @destination_port)
