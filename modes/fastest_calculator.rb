@@ -1,6 +1,6 @@
-require_relative '../data_provider'
+require_relative 'base_calculator'
 
-class FastestCalculator
+class FastestCalculator < BaseCalculator
   def self.calculate(origin_port, destination_port)
     [DataProvider.instance.sailings.first]
   end
