@@ -4,7 +4,6 @@ require_relative '../currency_converter'
 class CheapestDirectCalculator
   def self.calculate(origin_port, destination_port)
     data = JSON.parse(File.read('response.json'))
-    results = []
 
     sailings = data['sailings']
     rates = data['rates']
@@ -28,16 +27,6 @@ class CheapestDirectCalculator
 
     cheapest_sailing = filtered_sailings.min_by { |s| s['converted_rate'].to_f }
 
-    results << {
-      origin_port: cheapest_sailing['origin_port'],
-      destination_port: cheapest_sailing['destination_port'],
-      departure_date: cheapest_sailing['departure_date'],
-      arrival_date: cheapest_sailing['arrival_date'],
-      sailing_code: cheapest_sailing['sailing_code'],
-      rate: cheapest_sailing['rate'],
-      rate_currency: cheapest_sailing['rate_currency']
-    }
-
-    results
+    [cheapest_sailing]
   end
 end

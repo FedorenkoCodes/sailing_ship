@@ -26,16 +26,35 @@ class ShippingCalculator
     FAKE_INPUT ? fake_input : get_user_input
 
     if input_valid?
-      output_data = calculate_shipping_costs
+      sailings = calculate_shipping_costs
 
-      output_json = JSON.pretty_generate(output_data)
-      puts output_json
+      print_sailings(sailings)
     else
       puts "Invalid input"
     end
   end
 
   private
+
+  def print_sailings(sailings)
+    results = []
+
+    sailings.each do |sailing|
+      results <<
+        {
+          origin_port: sailing['origin_port'],
+          destination_port: sailing['destination_port'],
+          departure_date: sailing['departure_date'],
+          arrival_date: sailing['arrival_date'],
+          sailing_code: sailing['sailing_code'],
+          rate: sailing['rate'],
+          rate_currency: sailing['rate_currency']
+        }
+
+    end
+
+    puts JSON.pretty_generate(results)
+  end
 
   def calculate_shipping_costs
     case @criteria

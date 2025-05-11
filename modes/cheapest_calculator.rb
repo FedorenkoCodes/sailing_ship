@@ -1,11 +1,11 @@
 class CheapestCalculator
   def self.calculate(origin_port, destination_port)
-    [
-      {
-        origin_port: origin_port,
-        destination_port: destination_port,
-        criteria: 'cheapest'
-      }
-    ]
+    data = JSON.parse(File.read('response.json'))
+
+    sailings = data['sailings']
+    rates = data['rates']
+    exchange_rates = data['exchange_rates']
+
+    [sailings.first]
   end
 end
