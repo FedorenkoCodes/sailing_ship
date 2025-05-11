@@ -47,7 +47,7 @@ class ShippingCalculator
           departure_date: sailing['departure_date'],
           arrival_date: sailing['arrival_date'],
           sailing_code: sailing['sailing_code'],
-          rate: sailing['rate'],
+          rate: sailing['rate'].to_s,
           rate_currency: sailing['rate_currency']
         }
 
