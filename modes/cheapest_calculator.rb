@@ -22,30 +22,6 @@ class CheapestCalculator < BaseCalculator
 
   private
 
-  def self.find_all_legs(origin_port, destination_port, sailings, previous_arrival_date = nil)
-    legs = []
-
-    sailings.each do |sailing|
-      next if previous_arrival_date && sailing['departure_date'] < previous_arrival_date
-
-      if sailing['origin_port'] == origin_port
-        if sailing['destination_port'] == destination_port
-          legs << [populate_rate(sailing)]
-        else
-          remaining_sailings = sailings.reject { |s| s == sailing }
-          next_legs = find_all_legs(sailing['destination_port'], destination_port, remaining_sailings, sailing['arrival_date'])
-          next_legs.each do |next_leg|
-            legs << [populate_rate(sailing)] + next_leg
-          end
-        end
-      end
-    end
-
-    legs
-  end
-
-  private
-
   def self.calculate_leg_total_rate(sailings)
     sum = 0.0
 

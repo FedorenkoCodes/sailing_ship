@@ -39,21 +39,12 @@ output=$(printf "CNSHA \n NLRTM \n fastest \n" | docker run -i --rm calculator)
 expected_output='[
   {
     "origin_port": "CNSHA",
-    "destination_port": "ESBCN",
-    "departure_date": "2022-01-29",
-    "arrival_date": "2022-02-12",
-    "sailing_code": "ERXQ",
-    "rate": "261.96",
-    "rate_currency": "EUR"
-  },
-  {
-    "origin_port": "ESBCN",
     "destination_port": "NLRTM",
-    "departure_date": "2022-02-16",
-    "arrival_date": "2022-02-20",
-    "sailing_code": "ETRG",
-    "rate": "69.96",
-    "rate_currency": "USD"
+    "departure_date": "2022-01-29",
+    "arrival_date": "2022-02-15",
+    "sailing_code": "QRST",
+    "rate": "761.96",
+    "rate_currency": "EUR"
   }
 ]'
 

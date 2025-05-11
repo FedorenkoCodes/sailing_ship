@@ -19,7 +19,7 @@ class ShippingCalculator
   def fake_input
     @origin_port = 'CNSHA'
     @destination_port = 'NLRTM'
-    @criteria = 'cheapest'
+    @criteria = 'fastest'
   end
 
   def toot
