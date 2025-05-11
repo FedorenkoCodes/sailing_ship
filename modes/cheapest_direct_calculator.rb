@@ -14,12 +14,12 @@ class CheapestDirectCalculator
       sailing['origin_port'] == origin_port && sailing['destination_port'] == destination_port
     end
 
-    raise "No sailings found" if filtered_sailings.empty?
+    raise "No sailings found between #{origin_port} and #{destination_port}" if filtered_sailings.empty?
 
     filtered_sailings.each do |sailing|
       rate = rates.find { |r| r['sailing_code'] == sailing['sailing_code'] }
 
-      raise "No rate found" if rate.nil?
+      raise "No rate found for sailing #{sailing['sailing_code']}" if rate.nil?
 
       sailing['rate'] = rate['rate']
       sailing['rate_currency'] = rate['rate_currency']
