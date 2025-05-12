@@ -1,10 +1,12 @@
 # Shipment Calculator Ruby Script
 
-This project contains a Ruby script that performs calculations of shipment prices. The script can be built and run using Docker.
+This project contains a Ruby script that finds sailings based on search criteria. The script can be built and run using Docker.
 
 ## Prerequisites
 
 - Docker installed on your machine
+- Terminal
+- You are an engineering manager or hiring manager who are paid for looking at this kind of stuff
 
 ## Building the Docker Image
 
@@ -32,5 +34,3 @@ To run test, use the following command:
 ```
 ./test_script.sh
 ```
-
-This will run the only test I've made up just to try it out.
