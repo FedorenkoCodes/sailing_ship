@@ -3,7 +3,7 @@
 require 'rspec'
 require 'date'
 require_relative '../modes/base_calculator'
-require_relative '../data_provider'
+require_relative '../lib/data_provider'
 
 RSpec.describe BaseCalculator do
   describe '.find_all_legs' do

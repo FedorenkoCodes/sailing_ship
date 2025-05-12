@@ -2,7 +2,7 @@
 
 require 'rspec'
 require_relative '../modes/fastest_calculator'
-require_relative '../data_provider'
+require_relative '../lib/data_provider'
 
 RSpec.describe FastestCalculator do
   describe '.calculate' do

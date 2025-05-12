@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../data_provider'
-require_relative '../currency_converter'
+require_relative '../lib/data_provider'
+require_relative '../lib/currency_converter'
 
 class BaseCalculator
   def self.find_all_legs(origin_port, destination_port, sailings, previous_arrival_date = nil)
